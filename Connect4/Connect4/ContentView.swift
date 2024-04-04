@@ -53,8 +53,8 @@ struct ContentView: View {
                                              Slot(boardIndex: 32, filled: nil, columnIndex: 2),
                                              Slot(boardIndex: 33, filled: nil, columnIndex: 3),
                                              Slot(boardIndex: 34, filled: nil, columnIndex: 4),
-                                                  Slot(boardIndex: 35, filled: nil, columnIndex: 5)]
-                                             
+                                             Slot(boardIndex: 35, filled: nil, columnIndex: 5)]
+    
     
     
     var body: some View {
@@ -77,64 +77,68 @@ struct ContentView: View {
                                         lastSlot = slot
                                     }
                                     else {
-                                            if lastSlot != nil {
-                                                lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
-                                                if let newSlot = lastSlot {
-                                                    slots[newSlot.boardIndex] = newSlot
-                                                }
-                                                break
+                                        if lastRow.contains(slot.boardIndex) && slot.filled == nil  {
+                                            lastSlot = slot
+                                            lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
+                                            if let newSlot = lastSlot {
+                                                slots[newSlot.boardIndex] = newSlot
                                             }
+                                            break
                                         }
-    
-                                    }
+                                        lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
+                                        if let newSlot = lastSlot {
+                                            slots[newSlot.boardIndex] = newSlot
+                                        }
                                         
+                                    }
+                                    
+                                }
+                                lastSlot = nil
+                                turn.toggle()
                             }
-                            lastSlot = nil
-                            turn.toggle()
                         }
                 }
-                
-                
+                    
+                }
+            }
+        }
+        func determineTurn() -> Player {
+            if turn {
+                return Player.red
+            } else {
+                return Player.yellow
+            }
+            
+        }
+        func createSlots() {
+            var s: [Slot] = []
+            for col in 0..<6 {
+                for slot in stride(from: col, to: col+30, by: 6) {
+                    s.append(Slot(boardIndex: slot, columnIndex: col))
+                    
+                }
             }
         }
     }
-    func determineTurn() -> Player {
-        if turn {
-            return Player.red
-        } else {
-            return Player.yellow
-        }
-        
+    enum Player {
+        case red
+        case yellow
     }
-    func createSlots() {
-        var s: [Slot] = []
-        for col in 0..<6 {
-            for slot in stride(from: col, to: col+30, by: 6) {
-                s.append(Slot(boardIndex: slot, columnIndex: col))
-                
-            }
-        }
+    struct Slot {
+        let boardIndex: Int
+        var filled: Move?
+        let columnIndex: Int
     }
-}
-enum Player {
-    case red
-    case yellow
-}
-struct Slot {
-    let boardIndex: Int
-    var filled: Move?
-    let columnIndex: Int
-}
-
-struct Move {
-    let player : Player
-    let boardIndex: Int
     
-    var indicator: Color {
-        return player == .red ? Color.red : Color.yellow
+    struct Move {
+        let player : Player
+        let boardIndex: Int
+        
+        var indicator: Color {
+            return player == .red ? Color.red : Color.yellow
+        }
     }
-}
-
-#Preview {
-    ContentView()
-}
+    
+    #Preview {
+        ContentView()
+    }
