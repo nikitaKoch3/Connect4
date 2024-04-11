@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A144FB0A2BB6006800A34AB6 /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A144FB092BB6006800A34AB6 /* SoundService.swift */; };
-		A144FB0C2BB6035800A34AB6 /* suiii-by-voicemod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A144FB0B2BB6035800A34AB6 /* suiii-by-voicemod.mp3 */; };
-		A144FB0E2BB6037200A34AB6 /* bonk-made-with-Voicemod-technology.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A144FB0D2BB6037100A34AB6 /* bonk-made-with-Voicemod-technology.mp3 */; };
+		A144FB0C2BB6035800A34AB6 /* sui.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A144FB0B2BB6035800A34AB6 /* sui.mp3 */; };
+		A144FB0E2BB6037200A34AB6 /* sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A144FB0D2BB6037100A34AB6 /* sound.mp3 */; };
 		A1DB16B12B9907740008B7F1 /* Connect4App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB16B02B9907740008B7F1 /* Connect4App.swift */; };
 		A1DB16B32B9907740008B7F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DB16B22B9907740008B7F1 /* ContentView.swift */; };
 		A1DB16B52B9907750008B7F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1DB16B42B9907750008B7F1 /* Assets.xcassets */; };
@@ -18,8 +18,8 @@
 
 /* Begin PBXFileReference section */
 		A144FB092BB6006800A34AB6 /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
-		A144FB0B2BB6035800A34AB6 /* suiii-by-voicemod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "suiii-by-voicemod.mp3"; path = "../../../../../Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/suiii-by-voicemod.mp3"; sourceTree = "<group>"; };
-		A144FB0D2BB6037100A34AB6 /* bonk-made-with-Voicemod-technology.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bonk-made-with-Voicemod-technology.mp3"; path = "../../../../../Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/bonk-made-with-Voicemod-technology.mp3"; sourceTree = "<group>"; };
+		A144FB0B2BB6035800A34AB6 /* sui.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sui.mp3; path = "../../../../../Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/sui.mp3"; sourceTree = "<group>"; };
+		A144FB0D2BB6037100A34AB6 /* sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound.mp3; path = "../../../../../Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/sound.mp3"; sourceTree = "<group>"; };
 		A1DB16AD2B9907740008B7F1 /* Connect4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1DB16B02B9907740008B7F1 /* Connect4App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect4App.swift; sourceTree = "<group>"; };
 		A1DB16B22B9907740008B7F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,8 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				A1DB16B72B9907750008B7F1 /* Preview Assets.xcassets */,
-				A144FB0B2BB6035800A34AB6 /* suiii-by-voicemod.mp3 */,
-				A144FB0D2BB6037100A34AB6 /* bonk-made-with-Voicemod-technology.mp3 */,
+				A144FB0B2BB6035800A34AB6 /* sui.mp3 */,
+				A144FB0D2BB6037100A34AB6 /* sound.mp3 */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -135,9 +135,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DB16B82B9907750008B7F1 /* Preview Assets.xcassets in Resources */,
-				A144FB0C2BB6035800A34AB6 /* suiii-by-voicemod.mp3 in Resources */,
+				A144FB0C2BB6035800A34AB6 /* sui.mp3 in Resources */,
 				A1DB16B52B9907750008B7F1 /* Assets.xcassets in Resources */,
-				A144FB0E2BB6037200A34AB6 /* bonk-made-with-Voicemod-technology.mp3 in Resources */,
+				A144FB0E2BB6037200A34AB6 /* sound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

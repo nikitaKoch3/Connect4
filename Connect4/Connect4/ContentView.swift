@@ -59,6 +59,15 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+             Circle()
+                .frame(width: 150)
+                .padding(.vertical, 50)
+                .foregroundColor(determineColor())
+                .overlay {
+                    Text("Turn")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(0..<36) { i in
                     Circle()
@@ -70,14 +79,15 @@ struct ContentView: View {
                         })
                         .onTapGesture {
                             let tappedCol = slots[i].columnIndex
-                            
+                            SoundManager.instance.playSound()
                             for slot in slots {
+                                
                                 if slot.columnIndex == tappedCol {
                                     if slot.filled == nil && !lastRow.contains(slot.boardIndex) {
                                         lastSlot = slot
                                     }
                                     else {
-                                        if lastRow.contains(slot.boardIndex) && slot.filled == nil  {
+                                        if lastRow.contains(slot.boardIndex) && slot.filled == nil {
                                             lastSlot = slot
                                             lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
                                             if let newSlot = lastSlot {
@@ -85,60 +95,70 @@ struct ContentView: View {
                                             }
                                             break
                                         }
-                                        lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
-                                        if let newSlot = lastSlot {
-                                            slots[newSlot.boardIndex] = newSlot
+                                        else {
+                                            lastSlot?.filled = Move(player: determineTurn(), boardIndex: i)
+                                            if let newSlot = lastSlot {
+                                                slots[newSlot.boardIndex] = newSlot
+                                            }
                                         }
-                                        
                                     }
-                                    
                                 }
-                                lastSlot = nil
-                                turn.toggle()
                             }
+                            lastSlot = nil
+                            turn.toggle()
                         }
                 }
-                    
-                }
+                
             }
         }
-        func determineTurn() -> Player {
-            if turn {
-                return Player.red
-            } else {
-                return Player.yellow
-            }
+    }
+    func determineTurn() -> Player {
+        if turn {
+            return Player.red
+        } else {
+            return Player.yellow
+        }
+        
+    }
+    
+    func determineColor() -> Color {
+        if turn {
+            return Color.red
             
         }
-        func createSlots() {
-            var s: [Slot] = []
-            for col in 0..<6 {
-                for slot in stride(from: col, to: col+30, by: 6) {
-                    s.append(Slot(boardIndex: slot, columnIndex: col))
-                    
-                }
+        return Color.yellow
+    }
+    func createSlots() {
+        var s: [Slot] = []
+        for col in 0..<6 {
+            for slot in stride(from: col, to: col+30, by: 6) {
+                s.append(Slot(boardIndex: slot, columnIndex: col))
+                
             }
         }
     }
-    enum Player {
-        case red
-        case yellow
-    }
-    struct Slot {
-        let boardIndex: Int
-        var filled: Move?
-        let columnIndex: Int
-    }
     
-    struct Move {
-        let player : Player
-        let boardIndex: Int
-        
-        var indicator: Color {
-            return player == .red ? Color.red : Color.yellow
-        }
-    }
+    func checkWinComination
+}
+enum Player {
+    case red
+    case yellow
+}
+struct Slot {
+    let boardIndex: Int
+    var filled: Move?
+    let columnIndex: Int
+}
+
+struct Move {
+    let player : Player
+    let boardIndex: Int
     
-    #Preview {
-        ContentView()
+    var indicator: Color {
+        return player == .red ? Color.red : Color.yellow
     }
+}
+
+#Preview {
+    ContentView()
+}

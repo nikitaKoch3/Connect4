@@ -10,14 +10,14 @@ import AVKit
 
 class SoundManager {
     static let instance = SoundManager()
-    var player: AVAudioPlayer
+    var player: AVAudioPlayer?
     
     func playSound() {
-        guard let url = Bundle.main.url(forResource: <#T##String?#>, withExtension: <#T##String?#>) else { return }
+        guard let url = Bundle.main.url(forResource: "sui", withExtension: ".mp3") else { return }
             
             do {
                 player = try AVAudioPlayer(contentsOf: url)
-                player.play()
+                player?.play()
             } catch let error {
                     print ("Error: \(error.localizedDescription)")
                 }
