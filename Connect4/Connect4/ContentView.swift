@@ -103,6 +103,13 @@ struct ContentView: View {
                                         }
                                     }
                                 }
+                               
+                            }
+                            if checkRowWinCombinations(for: .red) {
+                                print("-----red wins----")
+                            }
+                            if checkRowWinCombinations(for: .yellow) {
+                                print("----yellow wins-------")
                             }
                             lastSlot = nil
                             turn.toggle()
@@ -138,7 +145,29 @@ struct ContentView: View {
         }
     }
     
-    func checkWinComination
+func checkWinComination( player: Player) -> Bool {
+        return false
+    }
+                                                     
+ func checkRowWinCombinations(for player : Player) -> Bool {
+       var filledRows = 0
+     let reloadSlots = [0, 6, 12, 18, 24, 30]
+     for slot in slots {
+         if reloadSlots.contains(slot.boardIndex) {
+             filledRows = 0
+         }
+         if slot.filled != nil && slot.filled?.player == player {
+             filledRows += 1
+                if filledRows == 4 {
+                     return true
+                 }
+             }
+             else {
+                 filledRows = 0
+             }
+     }
+     return false
+    }
 }
 enum Player {
     case red
