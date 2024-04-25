@@ -79,7 +79,7 @@ struct ContentView: View {
                         })
                         .onTapGesture {
                             let tappedCol = slots[i].columnIndex
-                            SoundManager.instance.playSound()
+//                            SoundManager.instance.playSound()
                             for slot in slots {
                                 
                                 if slot.columnIndex == tappedCol {
@@ -105,10 +105,10 @@ struct ContentView: View {
                                 }
                                
                             }
-                            if checkRowWinCombinations(for: .red) {
+                            if checkColWinCombinations(for: .red) {
                                 print("-----red wins----")
                             }
-                            if checkRowWinCombinations(for: .yellow) {
+                            if checkColWinCombinations(for: .yellow) {
                                 print("----yellow wins-------")
                             }
                             lastSlot = nil
@@ -145,28 +145,53 @@ struct ContentView: View {
         }
     }
     
-func checkWinComination( player: Player) -> Bool {
+    func checkWinComination( player: Player) -> Bool {
+        return false
+    }
+    
+    func checkColWinCombinations(for player : Player) -> Bool {
+        var filledRows = 0
+        let reloadSlots = [0, 1, 2, 3, 4, 5]
+        for col in 0..<6 {
+            for slot in slots {
+                if slot.columnIndex != col {
+                    continue
+                }
+                if reloadSlots.contains(slot.boardIndex) {
+                    filledRows = 0
+                }
+                if slot.filled != nil && slot.filled?.player == player {
+                    filledRows += 1
+                    if filledRows == 4 {
+                        return true
+                    }
+                }
+                else {
+                    filledRows = 0
+                }
+            }
+        }
         return false
     }
                                                      
- func checkRowWinCombinations(for player : Player) -> Bool {
-       var filledRows = 0
-     let reloadSlots = [0, 6, 12, 18, 24, 30]
-     for slot in slots {
-         if reloadSlots.contains(slot.boardIndex) {
-             filledRows = 0
-         }
-         if slot.filled != nil && slot.filled?.player == player {
-             filledRows += 1
+    func checkRowWinCombinations(for player : Player) -> Bool {
+        var filledRows = 0
+        let reloadSlots = [0, 6, 12, 18, 24, 30]
+        for slot in slots {
+            if reloadSlots.contains(slot.boardIndex) {
+                filledRows = 0
+            }
+            if slot.filled != nil && slot.filled?.player == player {
+                filledRows += 1
                 if filledRows == 4 {
-                     return true
-                 }
-             }
-             else {
-                 filledRows = 0
-             }
-     }
-     return false
+                    return true
+                }
+            }
+            else {
+                filledRows = 0
+            }
+        }
+        return false
     }
 }
 enum Player {
