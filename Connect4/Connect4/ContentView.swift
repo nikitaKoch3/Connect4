@@ -14,6 +14,7 @@ struct ContentView: View {
                                GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible()),]
+    private let diagonalRows: [[Int]] = [[0, 7, 14, 21, 28, 35], [1, 7, 15, 22, 29], [2, 9, 16, 23], [5, 10, 15, 20,25, 30,], [4, 9, 14, 19, 24], [3, 8, 13, 18], [12, 19, 26, 33], [6, 13, 20, 27, 34], [17, 22, 27, 32], [11, 16, 21, 26, 31]]
     @State private var lastSlot: Slot? = nil
     private let lastRow: [Int] = [30, 31 ,32, 33, 34, 35]
     @State private var moves: [Move?] = Array(repeating: nil, count: 36)
@@ -59,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-             Circle()
+            Circle()
                 .frame(width: 150)
                 .padding(.vertical, 50)
                 .foregroundColor(determineColor())
@@ -79,7 +80,7 @@ struct ContentView: View {
                         })
                         .onTapGesture {
                             let tappedCol = slots[i].columnIndex
-//                            SoundManager.instance.playSound()
+                            //                            SoundManager.instance.playSound()
                             for slot in slots {
                                 
                                 if slot.columnIndex == tappedCol {
@@ -103,12 +104,12 @@ struct ContentView: View {
                                         }
                                     }
                                 }
-                               
+                                
                             }
-                            if checkColWinCombinations(for: .red) {
+                            if checkWinComination(player: .red) {
                                 print("-----red wins----")
                             }
-                            if checkColWinCombinations(for: .yellow) {
+                            if checkWinComination(player: .yellow) {
                                 print("----yellow wins-------")
                             }
                             lastSlot = nil
@@ -146,6 +147,15 @@ struct ContentView: View {
     }
     
     func checkWinComination( player: Player) -> Bool {
+        if checkRowWinCombinations(for: player) {
+    return true
+}
+        if checkColWinCombinations(for: player) {
+            return true
+        }
+        if checkDiagonalWinCombination(for: player) {
+            return true
+        }
         return false
     }
     
@@ -189,6 +199,33 @@ struct ContentView: View {
             }
             else {
                 filledRows = 0
+            }
+        }
+        return false
+    }
+    func getSlot(boardIndex: Int) -> Slot? {
+        for slot in slots {
+            if slot.boardIndex == boardIndex {
+                return slot
+            }
+        }
+        return nil
+    }
+      
+    func checkDiagonalWinCombination(for player: Player) -> Bool {
+        var filledSlots = 0
+        for slotArray in diagonalRows {
+            for index in slotArray {
+                 let slot = getSlot(boardIndex: index)!
+                    if slot.filled != nil && slot.filled?.player == player {
+                    filledSlots += 1
+                    if filledSlots == 4 {
+                        return true
+                    }
+                }
+                else {
+                    filledSlots = 0
+                }
             }
         }
         return false
